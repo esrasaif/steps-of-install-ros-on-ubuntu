@@ -1,0 +1,79 @@
+steps to install ros on ubuntu 
+1-install virtual machine , you may install virtuall box or VM ware , if one of them doesnot work ubntu on it try the onther one
+2-install ubuntu , you may install the latest version 22.04 or 20.04 be careful which one you will install it because this will efect on which version of ros you can install it 
+3-write below commands on the terminal screen on the ubuntu :
+4-to setup your computer to accept software from packages.ros.org , write the below command 
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+5-to setup your key ,write the below command 
+sudo apt install curl # if you haven't already installed curl
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+6-now update your Debian package index
+sudo apt update
+7-now install ros in this have everything in Desktop plus 2D/3D simulators and 2D/3D perception packages , *notice*the name of version of ros here is noetic but you may install another one like kinetic  
+sudo apt install ros-noetic-desktop-full
+8-to setup the environment 
+source /opt/ros/noetic/setup.bash
+then write
+echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+then 
+source ~/.bashrc
+9-To create and manage your own ROS workspaces you have to install many tools or its called dependencies for building ROS packages
+   sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+   then
+   sudo apt install python3-rosdep
+   then 
+   sudo rosdep init
+    then
+    rosdep update
+    10-now we will install catkin which from it we can make workspace ,*notice*here i named the workspace by catkin_ws but you can name it anythig else if you want
+    sudo apt-get install ros-noetic-catkin
+    then we will craet file inside it 
+    mkdir -p ~/catkin_ws/src
+     then
+      cd ~/catkin_ws/
+     then we will install inside file src all the packages that related to arm
+      catkin_make
+      then 
+      cd ~/catkin_ws/src
+     then 
+      git clone https://github.com/smart-methods/arduino_robot_arm.git 
+      then
+      cd ~/catkin_ws
+    then to install some packages from ros 
+      rosdep install --from-paths src --ignore-src -r -y
+    then
+     sudo apt-get install ros-kinetic-moveit
+   then
+     sudo apt-get install ros-kinetic-joint-state-publisher ros-kinetic-joint-state-publisher-gui
+   then
+    sudo apt-get install ros-kinetic-gazebo-ros-control joint-state-publisher
+   then
+     sudo apt-get install ros-kinetic-ros-controllers ros-kinetic-ros-control
+ 11-now we have to [ut the source file of setup.bash inside bashrc so continue to put the below commands
+     sudo nano ~/.bashrc
+      after write this command you have to move to the last commands that appear on the terminal screen to write the next command, you have to write the name of your machine that will appear in the next line to know yhat go to the files >home>catkin_ws >devel> click right on the file "setup.bash" >properties> then at paren folder you will find thelink of the filewith your own name machine so then you can copy it and adding at the beginning the word "sourc" and at the end " /setup.bash "  , as i wrote in the next line  
+    source /home/esra/catkin_ws/devel/setup.bash     
+   then 
+    ctrl + o
+   then
+    pree enter 
+   then
+     ctrl + x
+    then 
+     source ~/.bashrc
+     
+ 12-finally write last command below to operate the program Rvis
+       roslaunch robot_arm_pkg check_motors.launch
+
+      
+    
+    
+this some of links that helped me so it is may helped you :
+   -https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html
+   -https://wiki.ros.org/ROS/Installation
+   -https://releases.ubuntu.com/20.04/
+   -https://youtu.be/IoE3J8VQ3iQ
+   -https://www.youtube.com/watch?v=jP4OzaeCh38
+   -https://www.youtube.com/watch?v=wrofe4si2ps&t=657s
+
+
